@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, body {
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.sales-title {
+  @apply bg-[#675d5dbd] px-32 py-1
+}
