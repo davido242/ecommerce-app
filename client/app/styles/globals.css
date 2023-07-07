@@ -9,5 +9,9 @@
 }
 
 .sales-title {
-  @apply bg-[#675d5dbd] px-32 py-1
+  @apply bg-brown-bg w-full text-center py-1;
+}
+
+.form-input {
+  @apply px-4 py-2 outline-none text-[#675d5dbd] rounded;
 }
