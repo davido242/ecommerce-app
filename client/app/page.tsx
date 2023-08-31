@@ -20,7 +20,7 @@ export default function Home() {
             </div>
             <div className='sales-title'>
               <h5>Deliveries</h5>
-              <Image src='/assets/images/cart-im3.webp' alt='' width='200' height='200' className='my-4 mx-auto' />
+              <Image src='/assets/images/cart-im1.jpeg' alt='' width='200' height='200' className='my-4 mx-auto' />
             </div>
           </div>
         </div>
