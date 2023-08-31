@@ -1,11 +1,11 @@
-# MERN STACK ecommerce-app
+## MERN STACK ecommerce-app
 
-# MYSQL, EXPRESS, NEXTjs and NODE Techonologies used.
+## MYSQL, EXPRESS, NEXTjs and NODE Techonologies used.
 
-## cd into client dir for frontend
+## Change to client dir for frontend
 
 `cd client`
 
-## cd into server dir for backend services
+## Change to server dir for backend services
 
 `cd server`
