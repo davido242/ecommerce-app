@@ -17,21 +17,18 @@ app.get("/", (req, res) => {
 });
 
 app.post("/signup", async (req, res) => {
-  // const username = req.body.username;
   // Get and hash the user passwords and store in a MYSQL db
-  try {    
+  try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = { name: req.body.username, password: hashedPassword, address: req.body.address };
-    const existingUsers = await dbConnection.query("SELECT * FROM users WHERE names = ? LIMIT 1", [user.name]);
-    if(existingUsers) {
-      console.log("User Already Exists");
-      res.send("User exists");
-    } else{
-      await dbConnection.query(
-        
-      );
-      res.send("User created");
-    }
+    await dbConnection.query(
+      "INSERT INTO users(names, passwords, address) VALUES(?, ?, ?)",
+      [user.name, user.password, user.address]
+    );
+    // 1. ask Boss I cant do res.send and then redirect afterwards??
+    // res.send("User created");
+    // 2. ask Boss I have issues redirecting to client side
+    res.redirect('http://localhost:3000/login');
   } catch (error) {
     console.log("🚀 ~ file: index.js:29 ~ app.post ~ error:", error);
     res.send("Something went wrong.");
@@ -39,22 +36,22 @@ app.post("/signup", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
+  res.send("Login Page")
   // const user = users.find((user) => user.name == req.body.username);
   // if (user == null) {
   //   res.status(400).send("No user Found brov!");
   // }
-  try {
-    const username = req.body.username;
-    const users = await dbConnection.query("SELECT * FROM users WHERE names = ? LIMIT 1", [username])
-    console.log("Users Password Here: ", passwords);
-    if (await bcrypt.compare(req.body.password, passwords)) {
-      res.send("Render Dashboard if responding instead of send");
-      //res.redirect("/dashbo")
-    }
-  } catch (error) {
-    console.log("🚀 ~ file: index.js:46 ~ app.post ~ error:", error);
-    res.send("Not Allowed");
-  }
+  // try {
+  //   const username = req.body.username;
+  //   const users = await dbConnection.query("SELECT * FROM users WHERE names = ? LIMIT 1", [username])
+  //   console.log("Users Password Here: ", passwords);
+  //   if (await bcrypt.compare(req.body.password, passwords)) {
+  //     res.send("Render Dashboard if responding instead of send");
+  //   }
+  // } catch (error) {
+  //   console.log("🚀 ~ file: index.js:46 ~ app.post ~ error:", error);
+  //   res.send("Not Allowed");
+  // }
 });
 
 app.listen(port, () => {
