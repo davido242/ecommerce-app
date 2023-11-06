@@ -6,7 +6,7 @@ export default function signup() {
       <div className="container mx-auto px-8">
         <div className="bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto">
           <h2 className="text-center font-bold py-4">New User Signup</h2>
-          <form action="http://localhost:5000/signup" method="post" className="flex flex-col gap-6">
+          <form action="http://localhost:5001/signup" method="post" className="flex flex-col gap-6">
             <input type="text" name="username" placeholder="username" className="form-input" required />
             <input type="password" name="password" placeholder="Password" className="form-input" required />
             <input type="password" name="conPassword" placeholder="Confirm Password" className="form-input" required />
