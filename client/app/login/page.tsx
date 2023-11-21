@@ -1,33 +1,31 @@
-'use client';
-import { useState, FormEvent, useRef } from 'react';
+"use client"
+import { useState, useRef, FormEvent } from "react";
 import { useRouter } from 'next/navigation';
 
 export default function page() {
- const usernameRef  = useRef<HTMLInputElement | null>(null)
- const passwordRef  = useRef<HTMLInputElement | null>(null)
+  const [errorMessage, setErrorMessage] = useState("");
+  const usernameRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
 
- const [ErrorMsg, setErrorMsg] = useState("");
-
- const router = useRouter();
-  
-  const handleLogin = (e: FormEvent <HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-        
-    const body = new FormData();
-    body.set("username", usernameRef.current?.value ?? "");
-    body.set("password", passwordRef.current?.value ?? "");
+
+    const url = "http://localhost:5001/login";
     
-    const url = 'http://localhost:5001/login';
+    const body = new FormData();
+    body.set('username', usernameRef.current?.value ?? "")
+    body.set('password', passwordRef.current?.value ?? "")
 
     fetch(url, {
       method: "POST",
       body
-    }).then(response => response.json())
+    }).then(res => res.json())
     .then(data => {
-      setErrorMsg("");
+      setErrorMessage("");
       if(data.error) {
-        setErrorMsg(data.msg);
-      } else {
+        setErrorMessage(data.message)
+      }else {
         router.push("/dashboard")
       }
     })
@@ -38,8 +36,8 @@ export default function page() {
       <div className='container mx-auto px-8'>
         <div className='bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto'>
           <h2 className='text-center font-bold py-4'>Login to dashboard</h2>
-          {ErrorMsg == ""  ? null : <div className='text-red-500 text-center'>{ErrorMsg}</div> }
-          <form onSubmit={handleLogin} className='flex flex-col gap-4'>
+          {errorMessage == "" ? null : <div style={{color: "red"}} className='text-center'>{"**"}{errorMessage}{"**"}</div> }
+          <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
           <input type='text' ref={usernameRef} name="username" placeholder='username' className='form-input' />
           <input type='password' ref={passwordRef} name="password" placeholder='Password' className='form-input' />
           <div>

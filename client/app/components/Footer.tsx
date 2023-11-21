@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function footer() {
   return (
-    <div className='bg-brown-bg'>
+    <div className='bg-brown-bg mt-8 md:mt-2'>
       <div className="container mx-auto px-8 py-2 flex justify-between">
         <span>Dev &copy; 2023</span>
         <div>
