@@ -18,6 +18,8 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(upload.none());
 
+const jwtSecretKey = process.env.JWT_SECRET_KEY;
+
 app.get("/", (req, res) => {
   res.send({ error: false, msg: "Server is Working Fine...."});
 });
@@ -37,11 +39,16 @@ app.post("/signup", async (req, res) => {
       if (dbUser[0].num > 0) {
         res.send({ error: true, message: "User already exists, Please Login" });
       } else {
-        await dbConnection.query("INSERT INTO users (names, password, address) VALUES(?, ?, ?)", [
+        const [newUser] = await dbConnection.query("INSERT INTO users (names, password, address) VALUES(?, ?, ?)", [
           user.name,
           user.password,
           user.address,
         ]);
+        
+        const id = newUser.insertId;
+        const token = jwt.sign({ id }, jwtSecretKey, { expiresIn: "1h" })
+        
+        newUser.token = token;               
         res.send({ error: false });
       }
     }
@@ -60,39 +67,57 @@ app.post("/login", async (req, res) => {
       const [users] = await dbConnection.query("SELECT * FROM users WHERE names = ?", [username]);
       if (await bcrypt.compare(password, users[0].password)) {
         const id = users[0].id;
-        const token = jwt.sign({ id }, "jwtSecretKey", { expiresIn: 300 });
+        const token = jwt.sign({ id }, jwtSecretKey, { expiresIn: "3000" });
+        users.myName = "Daveedo1";
         console.log({ Longin: true, token, users });
-        res.send({ error: false })
+        // send a JWT token in the response headers upon successful authentication
+        // res.status(201).json({ token, error: false });
+        res.header('authorization', `Bearer ${token}`).status(201).json({ token, error: false });
+        // res.send({ error: false })
       } else {
         res.send({ error: true, message: "Wrong Pword"});
       }
     }
   } catch (error) {
     console.log("🚀 ~ file: index.js:59 ~ app.post ~ error:", error);
-    res.send({ error: true, message: "User does not exist"});
+    res.status(404).json({ error: true, message: "User does not exist"});
   }
 });
 
 const verifyJwt = function (req, res, next) {
-  const token = req.headers["access-token"];
+  // const token = req.header('Authorization');
+  const token = req.headers["authorization"].split(" ")[1];
+  // const token = req.headers["access-token"] || req.header('Authorization');
   if (!token) {
     res.json("We need token");
   } else {
-    jwt.verify(token, "jwtSecretKey", (err, decoded) => {
+    jwt.verify(token, jwtSecretKey, (err, decoded) => {
       if (err) {
-        res.json("Not Authenticated");
+        res.status(401).json("Not Authenticated");
       } else {
         req.userId = decoded.id;
+        // res.status(200).json("Authenticated");
         next();
       }
     });
   }
-  res.json("Authenticated");
 };
 
-app.get("/dashboard", verifyJwt, (req, res) => {
-  console.log("My dashboard");
-  res.send("Dashboard")
+app.get("/dashboard", verifyJwt, async (req, res) => {
+  try {
+    const query = "SELECT * FROM users WHERE id = ?";
+
+    const [rows] = await dbConnection.query(query, [req.userId]);
+    if(rows.length === 0) {
+      res.status(404).json(({error: "User not found"}));
+    }else{
+      const user = rows[0];
+      res.status(200).json({name: user.names, address: user.address});
+      console.log({name: user.names, address: user.address});
+    }
+  } catch (error) {
+    console.log("🚀 ~ file: index.js:113 ~ app.post ~ error:", error)    
+  }
 });
 
 app.listen(port, () => {

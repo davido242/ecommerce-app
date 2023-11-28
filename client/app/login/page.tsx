@@ -26,6 +26,7 @@ export default function page() {
       if(data.error) {
         setErrorMessage(data.message)
       }else {
+        window.localStorage.setItem('token', data.token);
         router.push("/dashboard")
       }
     })
