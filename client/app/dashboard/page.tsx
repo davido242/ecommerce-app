@@ -32,7 +32,7 @@ export default function page() {
       if(data.name == undefined ){
         alert("Session Expired, Please Login.")
         router.push("/login")
-      } else{        
+      } else{
         document.getElementById("name").innerHTML = data.name
       }
     })
