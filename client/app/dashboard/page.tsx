@@ -9,8 +9,7 @@ export default function page() {
     fetch('http://localhost:5001/dashboard', {
       method: "GET",
       headers: {
-        'daveed-key': window.localStorage.getItem('token')
-        // 'authorization': `Bearer ${window.localStorage.getItem('token')}`
+        'authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }).then(res => res.json())
     .then(data => {

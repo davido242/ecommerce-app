@@ -4,6 +4,7 @@ const { dbConnection } = require("./connection_db");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const authenticate = require("./middleware/authentication");
 
 const bodyParser = require("body-parser");
 const multer = require("multer");
@@ -69,12 +70,7 @@ app.post("/login", async (req, res) => {
         const id = users[0].id;
         const token = jwt.sign({ id }, jwtSecretKey, { expiresIn: "1h" });
         console.log({ Longin: true, token });
-        // try to set access-token in place of token in headers and see if it also works
-        res.set('daveed-key', token).status(201).json({ token, error: false });
-        // console.log(res.headers)
-        
-        // res.set('authorization', `Bearer ${token}`).status(201).json({ token, error: false });
-        // res.header('authorization', `Bearer ${token}`).status(201).json({ token, error: false });
+        res.set('authorization', `Bearer ${token}`).status(201).json({ token, error: false });        
       } else {
         res.send({ error: true, message: "Wrong Pword"});
       }
@@ -85,24 +81,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-const verifyJwt = function (req, res, next) {
-  // const token = req.headers["daveed-key"];
-  const token = req.headers["daveed-key"] || req.headers["authorization"].split(" ")[1];
-  if (!token) {
-    res.json("We need token");
-  } else {
-    jwt.verify(token, jwtSecretKey, (err, decoded) => {
-      if (err) {
-        res.status(401).json("Not Authenticated");
-      } else {
-        req.userId = decoded.id;
-        next();
-      }
-    });
-  }
-};
-
-app.get("/dashboard", verifyJwt, async (req, res) => {
+app.get("/dashboard", authenticate, async (req, res) => {
   try {
     const query = "SELECT * FROM users WHERE id = ?";
 
