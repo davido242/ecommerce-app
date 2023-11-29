@@ -67,13 +67,14 @@ app.post("/login", async (req, res) => {
       const [users] = await dbConnection.query("SELECT * FROM users WHERE names = ?", [username]);
       if (await bcrypt.compare(password, users[0].password)) {
         const id = users[0].id;
-        const token = jwt.sign({ id }, jwtSecretKey, { expiresIn: "3000" });
-        users.myName = "Daveedo1";
-        console.log({ Longin: true, token, users });
-        // send a JWT token in the response headers upon successful authentication
-        // res.status(201).json({ token, error: false });
-        res.header('authorization', `Bearer ${token}`).status(201).json({ token, error: false });
-        // res.send({ error: false })
+        const token = jwt.sign({ id }, jwtSecretKey, { expiresIn: "1h" });
+        console.log({ Longin: true, token });
+        // try to set access-token in place of token in headers and see if it also works
+        res.set('daveed-key', token).status(201).json({ token, error: false });
+        // console.log(res.headers)
+        
+        // res.set('authorization', `Bearer ${token}`).status(201).json({ token, error: false });
+        // res.header('authorization', `Bearer ${token}`).status(201).json({ token, error: false });
       } else {
         res.send({ error: true, message: "Wrong Pword"});
       }
@@ -85,9 +86,8 @@ app.post("/login", async (req, res) => {
 });
 
 const verifyJwt = function (req, res, next) {
-  // const token = req.header('Authorization');
-  const token = req.headers["authorization"].split(" ")[1];
-  // const token = req.headers["access-token"] || req.header('Authorization');
+  // const token = req.headers["daveed-key"];
+  const token = req.headers["daveed-key"] || req.headers["authorization"].split(" ")[1];
   if (!token) {
     res.json("We need token");
   } else {
@@ -96,7 +96,6 @@ const verifyJwt = function (req, res, next) {
         res.status(401).json("Not Authenticated");
       } else {
         req.userId = decoded.id;
-        // res.status(200).json("Authenticated");
         next();
       }
     });
@@ -112,8 +111,7 @@ app.get("/dashboard", verifyJwt, async (req, res) => {
       res.status(404).json(({error: "User not found"}));
     }else{
       const user = rows[0];
-      res.status(200).json({name: user.names, address: user.address});
-      console.log({name: user.names, address: user.address});
+      res.status(200).json({ name: user.names, address: user.address});
     }
   } catch (error) {
     console.log("🚀 ~ file: index.js:113 ~ app.post ~ error:", error)    

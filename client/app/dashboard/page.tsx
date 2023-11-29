@@ -1,31 +1,16 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from "next/navigation"
 
 export default function page() {
   const router = useRouter();
-  // const [userName, setUserName] = useState("");
-
-  // const jwtToken =  cookie;
-  
-  
-  // const url = 'http://localhost:5001/login';
-  // fetch(url, {
-  //   method: "GET",
-  //   headers: {
-  //     'x-access-token': jwtToken
-  //   }
-  // }).then(response => {
-
-  //   const jwtToken = response.headers.get('Authorization').split(' ')[1];
-  // })
-
   useEffect(() => {
     fetch('http://localhost:5001/dashboard', {
       method: "GET",
       headers: {
-        'authorization': `Bearer ${window.localStorage.getItem('token')}`
+        'daveed-key': window.localStorage.getItem('token')
+        // 'authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }).then(res => res.json())
     .then(data => {
