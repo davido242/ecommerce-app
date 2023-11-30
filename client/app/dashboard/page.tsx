@@ -24,10 +24,10 @@ export default function page() {
     });
   }, []);
 
-  const handleLogout = () => {
-    alert("Are you sure you want to log out?");
-    window.localStorage.removeItem('token')
-  }
+  // const handleLogout = () => {
+  //   alert("Are you sure you want to log out?");
+  //   window.localStorage.removeItem('token')
+  // }
 
   // React context API
 
@@ -38,7 +38,7 @@ export default function page() {
         <h2 className='text-center font-bold py-4'>Welcome to your Dashboard <span id="name"></span></h2>
       </div>
       <div className='text-center mt-9'>
-        <Link href='/login' onClick={handleLogout} className='cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4'>Logout</Link>
+        <Link href='/login'  className='cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4'>Logout</Link>
       </div>
     </div>
   </div>
