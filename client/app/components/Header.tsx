@@ -11,7 +11,7 @@ export default function header() {
         <div>
           <ul className='flex gap-3'>
             <li>
-              <Link href="/signup">              
+              <Link href="/signup">
                 Register
               </Link>
               </li>

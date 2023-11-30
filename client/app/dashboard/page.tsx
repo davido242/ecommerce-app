@@ -13,14 +13,23 @@ export default function page() {
       }
     }).then(res => res.json())
     .then(data => {
-      if(data.name == undefined ){
+      if(!window.localStorage.getItem('token')){
+        router.push("/login");
+      } else if(data.name == undefined ){
         alert("Session Expired, Please Login.")
         router.push("/login")
       } else{
         document.getElementById("name").innerHTML = data.name
       }
-    })
+    });
   }, []);
+
+  const handleLogout = () => {
+    alert("Are you sure you want to log out?");
+    window.localStorage.removeItem('token')
+  }
+
+  // React context API
 
   return (
     <div className=' min-h-[calc(100vh-7vh)] pt-2'>
@@ -29,7 +38,7 @@ export default function page() {
         <h2 className='text-center font-bold py-4'>Welcome to your Dashboard <span id="name"></span></h2>
       </div>
       <div className='text-center mt-9'>
-        <Link href='/login' className='cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4'>Logout</Link>
+        <Link href='/login' onClick={handleLogout} className='cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4'>Logout</Link>
       </div>
     </div>
   </div>
