@@ -13,7 +13,7 @@ export default function page() {
         'authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }).then(res => res.json())
-    .then(data => {
+    .then(data => {      
       if(!window.localStorage.getItem('token')){
         router.push("/login");
       } else if(data.name == undefined ){
