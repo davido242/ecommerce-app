@@ -1,10 +1,13 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Link from 'next/link';
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
+import { NameContext } from '../AuthContext/NameContext'
 
 export default function page() {
-  const [name, setName] = useState("")
+  // const [name, setName] = useState("")
+  const {name, setName} = useContext(NameContext);
+
   const router = useRouter();
   useEffect(() => {
     fetch('http://localhost:5001/dashboard', {
@@ -13,7 +16,7 @@ export default function page() {
         'authorization': `Bearer ${window.localStorage.getItem('token')}`
       }
     }).then(res => res.json())
-    .then(data => {      
+    .then(data => {
       if(!window.localStorage.getItem('token')){
         router.push("/login");
       } else if(data.name == undefined ){
@@ -29,6 +32,8 @@ export default function page() {
     alert("Are you sure you want to log out?");
     window.localStorage.removeItem('token')
   }
+
+  
   
   // React context API
 

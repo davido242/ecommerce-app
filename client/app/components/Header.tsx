@@ -1,7 +1,10 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useContext } from 'react';
+import { NameContext } from '../AuthContext/NameContext'
 
 export default function header() {
+  const {name, setName}: any = useContext(NameContext);
+  
   return (
     <div className='bg-brown-bg fixed w-full'>
       <div className="container mx-auto px-8 py-2 flex justify-between">
@@ -17,7 +20,7 @@ export default function header() {
               </li>
             <li>
               <Link href="/login">              
-                Login
+                Login: {name}
               </Link>
               </li>
           </ul>
