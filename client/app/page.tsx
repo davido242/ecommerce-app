@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className="p-8 min-h-screen bg-[#e7e7e7e0] pt-16">
       <div className='container mx-auto'>
-        <p className='text-[#675d5dbd]'>Shop at discounted rates</p>
+        <p className='text-[#675d5dbd] animate-pulse'>Shop at discounted rates</p>
         <h2 className='font-bold text-lg'>Ecommerce Web App with Next Js</h2>
         <div className='flex flex-col shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-2 md:py-4 mt-4'>
           <h3 className='uppercase tracking-widest py-4 font-bold'>Features</h3>
@@ -24,14 +24,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className='flex justify-evenly py-2'>
+        <div className='flex justify-evenly py-2 animate-bounce'>
           <Link href="/signup">
-            Signup
-          </Link> 
-          <p>or</p>
-          <Link href="/login">
-            Login
-          </Link>
+            Free Shipping using this code <span className='font-bold'>COM247</span>
+          </Link>           
         </div>
       </div>
     </main>

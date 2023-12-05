@@ -1,12 +1,11 @@
 "use client";
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
 import { NameContext } from '../AuthContext/NameContext'
 
 export default function page() {
-  // const [name, setName] = useState("")
-  const {name, setName} = useContext(NameContext);
+  const {name, setName}: any = useContext(NameContext);
 
   const router = useRouter();
   useEffect(() => {
@@ -17,7 +16,7 @@ export default function page() {
       }
     }).then(res => res.json())
     .then(data => {
-      if(!window.localStorage.getItem('token')){
+      if(!localStorage.getItem('token')){
         router.push("/login");
       } else if(data.name == undefined ){
         alert("Session Expired, Please Login.")
@@ -30,12 +29,9 @@ export default function page() {
 
   const handleLogout = () => {
     alert("Are you sure you want to log out?");
-    window.localStorage.removeItem('token')
+      localStorage.removeItem('token');
+      setName("");
   }
-
-  
-  
-  // React context API
 
   return (
     <div className=' min-h-[calc(100vh-7vh)] pt-2'>

@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { NameContext } from '../AuthContext/NameContext'
 
 export default function header() {
-  const {name, setName}: any = useContext(NameContext);
+  const { name }: any = useContext(NameContext);
   
   return (
     <div className='bg-brown-bg fixed w-full'>
@@ -19,9 +19,12 @@ export default function header() {
               </Link>
               </li>
             <li>
+              {name == "" ? 
               <Link href="/login">              
-                Login: {name}
-              </Link>
+                Login
+              </Link> :
+              `Welcome ${name}`
+               }              
               </li>
           </ul>
         </div>
