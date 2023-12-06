@@ -68,7 +68,7 @@ app.post("/login", async (req, res) => {
       const [users] = await dbConnection.query("SELECT * FROM users WHERE names = ?", [username]);
       if (await bcrypt.compare(password, users[0].password)) {
         const id = users[0].id;
-        const token = jwt.sign({ id }, jwtSecretKey, { expiresIn: "1h" });
+        const token = jwt.sign({ id }, jwtSecretKey, { expiresIn: "10m" });
         console.log({ Longin: true, token });
         res.set('authorization', `Bearer ${token}`).status(201).json({ token, error: false });        
       } else {

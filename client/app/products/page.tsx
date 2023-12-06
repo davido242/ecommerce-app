@@ -32,10 +32,17 @@ export default function page() {
     <div className=' min-h-[calc(100vh-7vh)] pt-2'>
     <div className='container mx-auto px-8'>
       <div className='bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto'>
-        <h2 className='text-center font-bold py-4'>Welcome to your Dashboard {name}</h2>
+        <h2 className='text-center font-bold py-4'>Add/Upload Products to Store</h2>
+        <form  className='flex flex-col gap-4'>
+          <input type='text'  name="username" placeholder='username' className='form-input' />
+          <input type='password'  name="password" placeholder='Password' className='form-input' />
+          <div>
+            <input type='submit' value='Login' className='cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4' />
+          </div>
+          </form>
       </div>
       <div className='text-center mt-9 flex justify-evenly'>
-        <Link href='/products' onClick={null} className='cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4'>Add Products</Link>
+        <Link href='/products' onClick={() => alert("Products added")} className='cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4'>Add Products</Link>
       </div>
     </div>
   </div>

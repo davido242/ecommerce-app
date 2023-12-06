@@ -18,7 +18,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(null);
 
   return (
     <html lang="en">

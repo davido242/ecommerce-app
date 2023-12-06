@@ -21,7 +21,7 @@ export default function page() {
       method: "POST",
       body
     }).then(res => res.json())
-    .then(data => {      
+    .then(data => {
       if(data.error) {
         setErrorMessage(data.message)
       }else {

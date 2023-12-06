@@ -1,34 +1,44 @@
-import Link from 'next/link';
-import React, { useContext } from 'react';
-import { NameContext } from '../AuthContext/NameContext'
+import Link from "next/link";
+import React, { useContext } from "react";
+import { NameContext } from "../AuthContext/NameContext";
 
 export default function header() {
-  const { name }: any = useContext(NameContext);
-  
+  const { name, setName }: any = useContext(NameContext);
+  const handleLogout = () => {
+    alert("Are you sure you want to log out?");
+      localStorage.removeItem('token');
+      setName("");
+  }
+
   return (
-    <div className='bg-brown-bg fixed w-full'>
+    <div className="bg-brown-bg fixed w-full">
       <div className="container mx-auto px-8 py-2 flex justify-between">
-        <div className='uppercase text-[#fff] font-bold text-2xl'>
+        <div className="uppercase text-[#fff] font-bold text-2xl">
           <Link href="/">Logo</Link>
         </div>
         <div>
-          <ul className='flex gap-3'>
-            <li>
-              <Link href="/signup">
-                Register
-              </Link>
+          {name == "" ? (
+            <ul className="flex gap-3">
+              <li>
+                <Link href="/signup">Register</Link>
               </li>
-            <li>
-              {name == "" ? 
-              <Link href="/login">              
-                Login
-              </Link> :
-              `Welcome ${name}`
-               }              
+              <li>
+                <Link href="/login">Login</Link>
               </li>
-          </ul>
+            </ul>
+          ) : (
+            <ul className="flex gap-3">              
+              <li>
+               <Link href='/login' onClick={handleLogout} className='cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4'>Logout</Link>
+              </li>
+              <li>{`Hi ${name}`}</li>
+              <li>
+              <span className="animate-ping inline-flex h-full w-full rounded-full bg-sky-400 opacity-75">O</span>
+              </li>
+            </ul>
+          )}
         </div>
       </div>
     </div>
-  )
+  );
 }
