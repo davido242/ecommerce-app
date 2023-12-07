@@ -21,11 +21,11 @@ app.use(upload.none());
 
 const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send({ error: false, msg: "Server is Working Fine...."});
 });
 
-app.post("/signup", async (req, res) => {
+app.post("/api/signup", async (req, res) => {
   try {
     const { password, conPassword } = req.body;
     if (password !== conPassword) {
@@ -59,7 +59,7 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   try {
     const { username, password } = req.body;
     if (!username || !password) {
@@ -81,7 +81,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/dashboard", authenticate, async (req, res) => {
+app.get("/api/dashboard", authenticate, async (req, res) => {
   try {
     const query = "SELECT * FROM users WHERE id = ?";
 
@@ -94,6 +94,21 @@ app.get("/dashboard", authenticate, async (req, res) => {
     }
   } catch (error) {
     console.log("🚀 ~ file: index.js:113 ~ app.post ~ error:", error)    
+  }
+});
+
+app.get("/api/products", authenticate, async (req, res) => {
+  try {
+    const query = "SELECT * FROM products";
+
+    const [rows] = await dbConnection.query(query);
+    if(rows.length === 0) {
+      res.status(404).json(({error: "No products found"}));
+    }else{      
+      res.status(200).json(rows);
+    }
+  } catch (error) {
+    console.log("🚀 ~ file: index.js:113 ~ app.post ~ error:", error)
   }
 });
 

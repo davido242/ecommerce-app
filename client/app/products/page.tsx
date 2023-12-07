@@ -1,50 +1,62 @@
 "use client";
-import { useEffect, useContext } from 'react';
-import Link from 'next/link';
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { NameContext } from '../AuthContext/NameContext'
 
 export default function page() {
-  const {name, setName}: any = useContext(NameContext);
+  const [products, setProducts] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
-    fetch('http://localhost:5001/dashboard', {
+    fetch("http://localhost:5001/api/products", {
       method: "GET",
       headers: {
-        'authorization': `Bearer ${window.localStorage.getItem('token')}`
-      }
-    }).then(res => res.json())
-    .then(data => {
-      if(!localStorage.getItem('token')){
-        router.push("/login");
-      } else if(data.name == undefined ){
-        alert("Session Expired, Please Login.")
-        router.push("/login")
-      } else{
-        setName(data.name)
-      }
-    });
+        authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!localStorage.getItem("token")) {
+          router.push("/login");
+        } else {
+          setProducts(data);
+        }
+      });
   }, []);
 
-  
   return (
-    <div className=' min-h-[calc(100vh-7vh)] pt-2'>
-    <div className='container mx-auto px-8'>
-      <div className='bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto'>
-        <h2 className='text-center font-bold py-4'>Add/Upload Products to Store</h2>
-        <form  className='flex flex-col gap-4'>
-          <input type='text'  name="username" placeholder='username' className='form-input' />
-          <input type='password'  name="password" placeholder='Password' className='form-input' />
-          <div>
-            <input type='submit' value='Login' className='cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4' />
-          </div>
+    <div className=" min-h-[calc(100vh-7vh)] pt-2">
+      <div className="container mx-auto px-8">
+        <div className="bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto">
+          <h2 className="text-center font-bold py-4">Available Products</h2>          
+          <ul>
+            {products?.map((product) => (
+              <li key={product.id}>{product.product_name}</li>
+            ))}
+          </ul>
+          <h3 className="text-center font-bold py-4">Add/Upload Products to Store</h3>
+          <form onSubmit={() => alert("Products added")} className="flex flex-col gap-4">
+            <input type="text" name="product-name" placeholder="Products Name" className="form-input" />
+            <label>Choose Size:</label>
+            <select id="size" name="size" className="form-input">
+              <option value="twoeight">28</option>
+              <option value="threeeight">38</option>
+              <option value="fourtwo" defaultValue="true">
+                42
+              </option>
+              <option value="fourfive">45</option>
+            </select>
+            <input type="number" name="price" placeholder="Price E.g. 500, 800 .." className="form-input" />
+            <div className="text-center mt-9 flex justify-evenly">
+              <input
+                type="submit"
+                value="Add Products"
+                className="cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4"
+              />
+            </div>
           </form>
-      </div>
-      <div className='text-center mt-9 flex justify-evenly'>
-        <Link href='/products' onClick={() => alert("Products added")} className='cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4'>Add Products</Link>
+        </div>
       </div>
     </div>
-  </div>
-  )
+  );
 }
