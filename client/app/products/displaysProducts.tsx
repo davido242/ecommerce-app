@@ -1,14 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function page() {
+  const [products, setProducts] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
     fetch("http://localhost:5001/api/products", {
-      method: "POST",
-      body,
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${window.localStorage.getItem("token")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -23,7 +27,13 @@ export default function page() {
   return (
     <div className=" min-h-[calc(100vh-7vh)] pt-2">
       <div className="container mx-auto px-8">
-        <div className="bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto">         
+        <div className="bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto">
+          <h2 className="text-center font-bold py-4">Available Products</h2>          
+          <ul>
+            {products?.map((product) => (
+              <li key={product.id}>{product.product_name}</li>
+            ))}
+          </ul>
           <h3 className="text-center font-bold py-4">Add/Upload Products to Store</h3>
           <form onSubmit={() => alert("Products added")} className="flex flex-col gap-4">
             <input type="text" name="product-name" placeholder="Products Name" className="form-input" />

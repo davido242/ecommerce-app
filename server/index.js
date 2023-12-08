@@ -111,6 +111,20 @@ app.get("/api/products", authenticate, async (req, res) => {
     console.log("🚀 ~ file: index.js:113 ~ app.post ~ error:", error)
   }
 });
+app.post("/api/products", authenticate, async (req, res) => {
+  try {
+    const query = "SELECT * FROM products";
+
+    const [rows] = await dbConnection.query(query);
+    if(rows.length === 0) {
+      res.status(404).json(({error: "No products found"}));
+    }else{      
+      res.status(200).json(rows);
+    }
+  } catch (error) {
+    console.log("🚀 ~ file: index.js:113 ~ app.post ~ error:", error)
+  }
+});
 
 app.listen(port, () => {
   console.log("server listening on port: ", port);
