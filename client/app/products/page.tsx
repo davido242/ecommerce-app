@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function page() {
+  // const [products, setProducts] = useState([]);
   const router = useRouter();
 
   // useEffect(() => {
   //   fetch("http://localhost:5001/api/products", {
-  //     method: "POST",
-      
+  //     method: "GET",
+  //     headers: {
+  //       authorization: `Bearer ${window.localStorage.getItem("token")}`,
+  //     },
   //   })
   //     .then((res) => res.json())
   //     .then((data) => {
@@ -19,6 +22,7 @@ export default function page() {
   //       }
   //     });
   // }, []);
+
 
   return (
     <div className=" min-h-[calc(100vh-7vh)] pt-2">
