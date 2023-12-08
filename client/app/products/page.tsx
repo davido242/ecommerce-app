@@ -5,20 +5,20 @@ import { useRouter } from "next/navigation";
 export default function page() {
   const router = useRouter();
 
-  useEffect(() => {
-    fetch("http://localhost:5001/api/products", {
-      method: "POST",
-      body,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (!localStorage.getItem("token")) {
-          router.push("/login");
-        } else {
-          setProducts(data);
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:5001/api/products", {
+  //     method: "POST",
+      
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (!localStorage.getItem("token")) {
+  //         router.push("/login");
+  //       } else {
+  //         setProducts(data);
+  //       }
+  //     });
+  // }, []);
 
   return (
     <div className=" min-h-[calc(100vh-7vh)] pt-2">

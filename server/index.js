@@ -21,7 +21,7 @@ app.use(upload.none());
 
 const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
   res.send({ error: false, msg: "Server is Working Fine...."});
 });
 
@@ -111,7 +111,7 @@ app.get("/api/products", authenticate, async (req, res) => {
     console.log("🚀 ~ file: index.js:113 ~ app.post ~ error:", error)
   }
 });
-app.post("/api/products", authenticate, async (req, res) => {
+app.post("/api/add-products", authenticate, async (req, res) => {
   try {
     const query = "SELECT * FROM products";
 
