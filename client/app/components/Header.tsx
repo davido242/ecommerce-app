@@ -11,7 +11,7 @@ export default function header() {
   };
 
   return (
-    <div className="bg-brown-bg fixed w-full">
+    <header className="bg-brown-bg fixed w-full z-[2]">
       <div className="container mx-auto px-8 py-2 flex justify-between">
         <ul className="flex gap-3">
           <div className="uppercase text-[#fff] font-bold text-2xl">
@@ -52,6 +52,6 @@ export default function header() {
           )}
         </div>
       </div>
-    </div>
+    </header>
   );
 }
