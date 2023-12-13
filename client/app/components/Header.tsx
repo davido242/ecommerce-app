@@ -6,16 +6,23 @@ export default function header() {
   const { name, setName }: any = useContext(NameContext);
   const handleLogout = () => {
     alert("Are you sure you want to log out?");
-      localStorage.removeItem('token');
-      setName("");
-  }
+    localStorage.removeItem("token");
+    setName("");
+  };
 
   return (
     <div className="bg-brown-bg fixed w-full">
       <div className="container mx-auto px-8 py-2 flex justify-between">
-        <div className="uppercase text-[#fff] font-bold text-2xl">
-          <Link href="/">Logo</Link>
-        </div>
+        <ul className="flex gap-3">
+          <div className="uppercase text-[#fff] font-bold text-2xl">
+            <Link href="/">Logo</Link>
+          </div>
+          {name == "" ? null : (
+            <Link href="/dashboard" className="pt-1">
+              Dashboard
+            </Link>
+          )}
+        </ul>
         <div>
           {name == "" ? (
             <ul className="flex gap-3">
@@ -27,13 +34,19 @@ export default function header() {
               </li>
             </ul>
           ) : (
-            <ul className="flex gap-3">              
+            <ul className="flex gap-3">
               <li>
-               <Link href='/login' onClick={handleLogout} className='cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4'>Logout</Link>
+                <Link
+                  href="/login"
+                  onClick={handleLogout}
+                  className="cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4"
+                >
+                  Logout
+                </Link>
               </li>
               <li>{`Hi ${name}`}</li>
               <li>
-              <span className="animate-ping inline-flex h-full w-full rounded-full bg-sky-400 opacity-75">O</span>
+                <span className="animate-ping inline-flex h-full w-full rounded-full bg-sky-400 opacity-75">O</span>
               </li>
             </ul>
           )}
