@@ -6,13 +6,13 @@ import { NameContext } from "../AuthContext/NameContext";
 export default function header() {
   const { name, setName }: any = useContext(NameContext);
   const router = useRouter();
+
   const handleLogout = (e: any) => {
     e.preventDefault();
     alert("Log out?");
     localStorage.removeItem("token");
     setName("");
     router.push("/login")
-
   };
 
   return (

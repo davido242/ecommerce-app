@@ -70,7 +70,7 @@ app.post("/api/login", async (req, res) => {
         const id = users[0].id;
         const token = jwt.sign({ id }, jwtSecretKey, { expiresIn: "10m" });
         console.log({ Longin: true, token });
-        res.set('authorization', `Bearer ${token}`).status(201).json({ token, error: false });        
+        res.set('authorization', `Bearer ${token}`).status(201).json({ token, error: false, name: users[0].names});        
       } else {
         res.send({ error: true, message: "Wrong Pword"});
       }
@@ -104,7 +104,7 @@ app.get("/api/products", authenticate, async (req, res) => {
     const [rows] = await dbConnection.query(query);
     if(rows.length === 0) {
       res.status(404).json(({error: "No products found"}));
-    }else{      
+    }else{
       res.status(200).json(rows);
     }
   } catch (error) {
@@ -113,9 +113,9 @@ app.get("/api/products", authenticate, async (req, res) => {
 });
 app.post("/api/add-products", authenticate, async (req, res) => {
   try {
-    const query = "SELECT * FROM products";
+    const query = "INSERT INTO products (product_name, size, price) VALUES (?, ?, ?);";
 
-    const [rows] = await dbConnection.query(query);
+    const [rows] = await dbConnection.query(query, []);
     if(rows.length === 0) {
       res.status(404).json(({error: "No products found"}));
     }else{      

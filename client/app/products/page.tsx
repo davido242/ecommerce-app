@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 export default function page() {
  
   const [products, setProducts] = useState([]);
-  // const [products, setProducts] = useContext(ProductContext);
+  // const [products, setProducts]: any = useContext(ProductContext);
   const router = useRouter();
 
   useEffect(() => {
@@ -18,22 +18,13 @@ export default function page() {
       },
     })
       .then((res) => res.json())
-      .then((data) => {
-        // if (!localStorage.getItem("token") && data.status === 401) {
-        //   router.push("/login");
-        // }
+      .then((data) => {       
         if(data.error) {
           router.push("/login");
         }
-        else if(Array.isArray(data)){          
+        else {     
           setProducts(data);
-        } else {
-          console.log("No data found");
         }
-        // else{
-        //   setProducts(data)
-        //   console.log(Array.isArray(data))
-        // }
       });
   }, []);
 

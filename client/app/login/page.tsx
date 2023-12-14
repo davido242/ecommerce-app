@@ -1,9 +1,11 @@
 "use client";
-import { useState, useRef, FormEvent } from "react";
+import { useState, useRef, FormEvent, useContext } from "react";
 import { useRouter } from "next/navigation";
+import { NameContext } from '../AuthContext/NameContext'
 
 export default function page() {
   const [errorMessage, setErrorMessage] = useState("");
+  const {name, setName}: any = useContext(NameContext);
   const usernameRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
@@ -27,6 +29,7 @@ export default function page() {
           setErrorMessage(data.message);
         } else {
           localStorage.setItem("token", data.token);
+          setName(data.name);
           router.push("/dashboard");
         }
       });
