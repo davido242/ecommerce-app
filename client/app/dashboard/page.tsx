@@ -19,6 +19,7 @@ export default function page() {
       <div className='bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto'>
         <h2 className='text-center font-bold py-4'>Here are some products for you {name}</h2>
         <div>
+          
           <ul>
             {/* {products.map((product) => ( <li key={product.id}>{product.product_name}</li>))} */}
           </ul>

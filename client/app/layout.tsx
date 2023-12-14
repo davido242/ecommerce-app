@@ -3,6 +3,7 @@ import "@/app/styles/globals.css";
 import { Inter } from "next/font/google";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Loading from "./components/Loading";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { NameContext } from "./AuthContext/NameContext";
@@ -52,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <NameContext.Provider value={{ name, setName }}>
           {loading ? (
-            <div>Loading</div>
+            <Loading />
           ) : (
             <ProductContext.Provider value={{ products, setProducts }}>
               <Header />
