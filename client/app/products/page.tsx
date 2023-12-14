@@ -19,9 +19,12 @@ export default function page() {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (!localStorage.getItem("token")) {
+        // if (!localStorage.getItem("token") && data.status === 401) {
+        //   router.push("/login");
+        // }
+        if(data.error) {
           router.push("/login");
-        } 
+        }
         else if(Array.isArray(data)){          
           setProducts(data);
         } else {

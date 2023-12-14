@@ -1,13 +1,18 @@
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import { NameContext } from "../AuthContext/NameContext";
 
 export default function header() {
   const { name, setName }: any = useContext(NameContext);
-  const handleLogout = () => {
-    alert("Are you sure you want to log out?");
+  const router = useRouter();
+  const handleLogout = (e: any) => {
+    e.preventDefault();
+    alert("Log out?");
     localStorage.removeItem("token");
     setName("");
+    router.push("/login")
+
   };
 
   return (
@@ -37,7 +42,7 @@ export default function header() {
             <ul className="flex gap-3">
               <li>
                 <Link
-                  href="/login"
+                  href=""
                   onClick={handleLogout}
                   className="cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4"
                 >

@@ -9,7 +9,7 @@ const verifyJwt = function (req, res, next) {
   } else {
     jwt.verify(token, jwtSecretKey, (err, decoded) => {
       if (err) {
-        res.status(401).json("Not Authenticated");
+        res.status(401).json({error: true, Message: "Not Authenticated"});
       } else {
         req.userId = decoded.id;
         next();

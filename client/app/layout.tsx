@@ -16,7 +16,7 @@ const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [name, setName] = useState("");
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
 
   return (
     <html lang="en">
