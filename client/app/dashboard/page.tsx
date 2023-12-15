@@ -3,14 +3,11 @@ import { useContext } from 'react';
 import Link from 'next/link';
 import { NameContext } from '../AuthContext/NameContext'
 import { ProductContext } from '../AuthContext/ProductContext';
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function page() {
-  const {name, setName}: any = useContext(NameContext);
+  const { name }: any = useContext(NameContext);
   const { products } = useContext(ProductContext);
-  // const [products, setProducts] = useState([]);
-  const router = useRouter();
   
   return (
     <div className=' min-h-[calc(100vh-7vh)] pt-2'>
