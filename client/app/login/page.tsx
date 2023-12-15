@@ -5,7 +5,7 @@ import { NameContext } from '../AuthContext/NameContext'
 
 export default function page() {
   const [errorMessage, setErrorMessage] = useState("");
-  const {name, setName}: any = useContext(NameContext);
+  const { setName }: any = useContext(NameContext);
   const usernameRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();

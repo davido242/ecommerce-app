@@ -1,10 +1,10 @@
 import { createContext } from 'react';
 
 type Product = {
-  id: string,
-  product_name: string,
-  size: number,
-  price: number,
+  id: string;
+  name: string;
+  size: number;
+  price: number;
 }
 
 type ProductC = {

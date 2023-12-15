@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import Link from 'next/link';
 import { NameContext } from '../AuthContext/NameContext'
 import { ProductContext } from '../AuthContext/ProductContext';
-import { useRouter } from "next/navigation";
 
 export default function page() {
   const { name }: any = useContext(NameContext);
@@ -16,7 +15,7 @@ export default function page() {
         <h2 className='text-center font-bold py-4'>Here are some products for you {name}</h2>
         <div>          
           <ul>
-            {products.map((product) => ( <li key={product.id}>{product.product_name}</li>))}
+            {products.map((product) => ( <li key={product.id}>{product.name}</li>))}
           </ul>
         </div>
       </div>

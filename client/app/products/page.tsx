@@ -4,7 +4,7 @@ import { ProductContext } from "../AuthContext/ProductContext";
 
 export default function page() {
    
-  const { products } = useContext(ProductContext);
+  const { products, setProducts } = useContext(ProductContext);
 
   return (
     <div className=" min-h-[calc(100vh-7vh)] pt-2">
@@ -13,7 +13,7 @@ export default function page() {
           <h2 className="text-center font-bold py-4">Available Products in the Store</h2>
           <ul className="list-disc pl-2">
             {products.map((product) => (
-            <li key={product.id}>{product.product_name}</li>))}
+            <li key={product.id}>{product.name}</li>))}
           </ul>
           <h3 className="text-center font-bold py-4">Add/Upload Products to Store</h3>
           <form onSubmit={() => alert("Products added")} className="flex flex-col gap-4">
