@@ -70,7 +70,7 @@ app.post("/api/login", async (req, res) => {
         const id = users[0].id;
         const token = jwt.sign({ id }, jwtSecretKey, { expiresIn: "10m" });
         console.log({ Longin: true, token });
-        res.set('authorization', `Bearer ${token}`).status(201).json({ token, error: false, name: users[0].name});        
+        res.set('authorization', `Bearer ${token}`).status(201).json({ token, error: false, name: users[0].name});
       } else {
         res.send({ error: true, message: "Wrong Pword"});
       }

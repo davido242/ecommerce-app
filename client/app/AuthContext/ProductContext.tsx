@@ -1,14 +1,14 @@
 import { createContext } from 'react';
 
 type Product = {
-  id: string;
+  id: number;
   name: string;
   size: number;
   price: number;
 }
 
 type ProductC = {
-  products?: Product[],
+  products?: Product[];
   setProducts?: (products: Product[]) => void
 }
 

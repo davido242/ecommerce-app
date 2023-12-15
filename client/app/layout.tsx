@@ -17,7 +17,7 @@ const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const [name, setName] = useState("");
+  const [name, setName] = useState([]);
   const [products, setProducts] = useState([]);
   const [loading, setloading] = useState(true);
   const router = useRouter();

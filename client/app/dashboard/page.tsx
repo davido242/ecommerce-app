@@ -5,7 +5,7 @@ import { NameContext } from '../AuthContext/NameContext'
 import { ProductContext } from '../AuthContext/ProductContext';
 
 export default function page() {
-  const { name }: any = useContext(NameContext);
+  const { name } = useContext(NameContext);
   const { products } = useContext(ProductContext);
   
   return (

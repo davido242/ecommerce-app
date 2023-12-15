@@ -9,4 +9,4 @@ type UsernameBox = {
   setName?: (name: Username[]) => void;
 }
 
-export const NameContext = createContext<UsernameBox>({});
+export const NameContext = createContext<UsernameBox | undefined>(undefined);
