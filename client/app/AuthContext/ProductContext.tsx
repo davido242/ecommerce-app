@@ -11,4 +11,5 @@ type ProductC = {
   products?: Product[],
   setProducts?: (products: Product[]) => void
 }
+
 export const ProductContext = createContext<ProductC>({})

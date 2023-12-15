@@ -2,7 +2,11 @@ import { createContext } from 'react';
 
 type Username = {
   name: string;
-  
 }
 
-export const NameContext = createContext({});
+type UsernameBox = {
+  name?: Username[];
+  setName?: (name: Username[]) => void;
+}
+
+export const NameContext = createContext<UsernameBox>({});

@@ -4,7 +4,7 @@ import { ProductContext } from "../AuthContext/ProductContext";
 
 export default function page() {
    
-  const { products, setProducts } = useContext(ProductContext);
+  const { products } = useContext(ProductContext);
 
   return (
     <div className=" min-h-[calc(100vh-7vh)] pt-2">
