@@ -8,9 +8,8 @@ import { useRouter } from "next/navigation";
 
 export default function page() {
   const {name, setName}: any = useContext(NameContext);
-  // const {products, setproducts}: any = useContext(ProductContext);
-  const [products, setProducts] = useState([]);
-  // const [products, setProducts]: any = useContext(ProductContext);
+  const { products } = useContext(ProductContext);
+  // const [products, setProducts] = useState([]);
   const router = useRouter();
   
   return (
@@ -18,10 +17,9 @@ export default function page() {
     <div className='container mx-auto px-8'>
       <div className='bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto'>
         <h2 className='text-center font-bold py-4'>Here are some products for you {name}</h2>
-        <div>
-          
+        <div>          
           <ul>
-            {/* {products.map((product) => ( <li key={product.id}>{product.product_name}</li>))} */}
+            {products.map((product: any) => ( <li key={product.id}>{product.product_name}</li>))}
           </ul>
         </div>
       </div>

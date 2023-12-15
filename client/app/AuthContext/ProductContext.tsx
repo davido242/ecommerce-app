@@ -1,3 +1,14 @@
 import { createContext } from 'react';
 
-export const ProductContext = createContext({})
+type Product = {
+  id: string,
+  product_name: string,
+  size: number,
+  price: number,
+}
+
+type ProductC = {
+  products?: Product[],
+  setProducts?: (products: Product[]) => void
+}
+export const ProductContext = createContext<ProductC>({})

@@ -1,32 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-// import { useContext } from "react";
-// import { ProductContext } from "../AuthContext/ProductContext";
+import { useContext } from "react";
+import { ProductContext } from "../AuthContext/ProductContext";
 
 export default function page() {
  
-  const [products, setProducts] = useState([]);
-  // const [products, setProducts]: any = useContext(ProductContext);
+  // const [products, setProducts] = useState([]);
+  const {products, setProducts} = useContext(ProductContext);
   const router = useRouter();
 
-  useEffect(() => {
-    fetch("http://localhost:5001/api/products", {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${window.localStorage.getItem("token")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {       
-        if(data.error) {
-          router.push("/login");
-        }
-        else {     
-          setProducts(data);
-        }
-      });
-  }, []);
 
 
 
@@ -36,7 +19,7 @@ export default function page() {
         <div className="bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto">         
           <h2 className="text-center font-bold py-4">Available Products in the Store</h2>
           <ul className="list-disc pl-2">
-            {products.map((product) => (
+            {products.map((product: any) => (
             <li key={product.id}>{product.product_name}</li>))}
           </ul>
           <h3 className="text-center font-bold py-4">Add/Upload Products to Store</h3>
