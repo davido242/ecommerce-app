@@ -16,7 +16,7 @@ export default function page() {
         <h2 className='text-center font-bold py-4'>Here are some products for you {name}</h2>
         <div>          
           <ul>
-            {products.map((product: any) => ( <li key={product.id}>{product.product_name}</li>))}
+            {products.map((product) => ( <li key={product.id}>{product.product_name}</li>))}
           </ul>
         </div>
       </div>

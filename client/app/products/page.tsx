@@ -1,17 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { ProductContext } from "../AuthContext/ProductContext";
 
 export default function page() {
- 
-  // const [products, setProducts] = useState([]);
-  const {products, setProducts} = useContext(ProductContext);
-  const router = useRouter();
-
-
-
+   
+  const { products } = useContext(ProductContext);
 
   return (
     <div className=" min-h-[calc(100vh-7vh)] pt-2">
@@ -19,7 +12,7 @@ export default function page() {
         <div className="bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto">         
           <h2 className="text-center font-bold py-4">Available Products in the Store</h2>
           <ul className="list-disc pl-2">
-            {products.map((product: any) => (
+            {products.map((product) => (
             <li key={product.id}>{product.product_name}</li>))}
           </ul>
           <h3 className="text-center font-bold py-4">Add/Upload Products to Store</h3>
