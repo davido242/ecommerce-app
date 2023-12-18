@@ -3,13 +3,13 @@ import { useState, useRef, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
 export default function signup() {
+  const [errorMsg, setErrorMsg] = useState("");
+
   const usernameRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const conPasswordRef = useRef<HTMLInputElement | null>(null);
   const addressRef = useRef<HTMLInputElement | null>(null);
 
-
-  const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
 
   function handleSubmit (event: FormEvent<HTMLFormElement>) {
@@ -29,7 +29,6 @@ export default function signup() {
       body
     }).then(res => res.json())
     .then(data => {
-      setErrorMsg("");
       if((data.error)) {
         setErrorMsg(data.message);
       }else {

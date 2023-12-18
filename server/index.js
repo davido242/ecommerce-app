@@ -111,18 +111,17 @@ app.get("/api/products", authenticate, async (req, res) => {
     console.log("🚀 ~ file: index.js:113 ~ app.post ~ error:", error)
   }
 });
+
 app.post("/api/add-products", authenticate, async (req, res) => {
   try {
-    const query = "INSERT INTO products (product_name, size, price) VALUES (?, ?, ?);";
-
-    const [rows] = await dbConnection.query(query, []);
-    if(rows.length === 0) {
-      res.status(404).json(({error: "No products found"}));
-    }else{      
-      res.status(200).json(rows);
-    }
+    const { name, size, price } = req.body;
+    const query = "INSERT INTO products (name, size, price) VALUES (?, ?, ?);";
+    
+    const [newProduct] = await dbConnection.query(query, [name, size, price]);
+    res.status(201).json({ error: false,  message: "Products Created", Products_name: newProduct.name });    
   } catch (error) {
-    console.log("🚀 ~ file: index.js:113 ~ app.post ~ error:", error)
+    console.log("🚀 ~ file: index.js:113 ~ app.post ~ error:", error);
+    res.status(404).json({ error: true, message: "Failed to add products"});
   }
 });
 

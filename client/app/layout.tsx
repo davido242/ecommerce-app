@@ -17,7 +17,7 @@ const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const [name, setName] = useState([]);
+  const [name, setName] = useState("");
   const [products, setProducts] = useState([]);
   const [loading, setloading] = useState(true);
   const router = useRouter();
@@ -48,23 +48,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       });
   }, []);
 
-  useEffect(() => {
-    fetch("http://localhost:5001/api/products", {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${window.localStorage.getItem("token")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {       
-        if(data.error) {
-          router.push("/login");
-        }
-        else {     
-          setProducts(data);
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:5001/api/products", {
+  //     method: "GET",
+  //     headers: {
+  //       authorization: `Bearer ${window.localStorage.getItem("token")}`,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {       
+  //       if(data.error) {
+  //         router.push("/login");
+  //       }
+  //       else {     
+  //         setProducts(data);
+  //       }
+  //     });
+  // }, []);
 
   return (
     <html lang="en">
