@@ -48,24 +48,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       });
   }, []);
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5001/api/products", {
-  //     method: "GET",
-  //     headers: {
-  //       authorization: `Bearer ${window.localStorage.getItem("token")}`,
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {       
-  //       if(data.error) {
-  //         router.push("/login");
-  //       }
-  //       else {     
-  //         setProducts(data);
-  //       }
-  //     });
-  // }, []);
-
   return (
     <html lang="en">
       <body>

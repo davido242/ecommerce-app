@@ -1,10 +1,8 @@
 "use client";
 import { FormEvent, useContext, useState, useRef } from "react";
-import { ProductContext } from "../AuthContext/ProductContext";
 
 export default function page() {
-   
-  const { products } = useContext(ProductContext);
+
   const [errorMsg, setErrorMessage] = useState("")
 
   const nameRef = useRef<HTMLInputElement | null>(null);
@@ -33,17 +31,12 @@ export default function page() {
           setErrorMessage(data.message)
         }
       })
-  } 
+  }
 
   return (
     <div className=" min-h-[calc(100vh-7vh)] pt-2">
       <div className="container mx-auto px-8">
         <div className="bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto">         
-          <h2 className="text-center font-bold py-4">Available Products in the Store</h2>          
-          <ul className="list-disc pl-2">
-            {products.map((product) => (
-            <li key={product.id}>{product.name}</li>))}
-          </ul>
           <h3 className="text-center font-bold py-4">Add/Upload Products to Store</h3>
           {errorMsg == "" ? null : <div style={{color: "red"}} className='text-red-500 text-center'>{"**"}{errorMsg}{"**"}</div>}
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -55,7 +48,7 @@ export default function page() {
               <option value="42" defaultValue="true">
                 42
               </option>
-              <option value="fourfive">45</option>
+              <option value="45">45</option>
             </select>
             <input type="number" ref={priceRef} name="price" placeholder="Price E.g. 500, 800 .." className="form-input" />
             <div className="text-center mt-9 flex justify-evenly">

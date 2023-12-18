@@ -115,10 +115,14 @@ app.get("/api/products", authenticate, async (req, res) => {
 app.post("/api/add-products", authenticate, async (req, res) => {
   try {
     const { name, size, price } = req.body;
-    const query = "INSERT INTO products (name, size, price) VALUES (?, ?, ?);";
-    
-    const [newProduct] = await dbConnection.query(query, [name, size, price]);
-    res.status(201).json({ error: false,  message: "Products Created", Products_name: newProduct.name });    
+    if(!(name, size, price)) {
+      res.send({error: true, message: "Please input all fields."});
+    } else {
+      const query = "INSERT INTO products (name, size, price) VALUES (?, ?, ?);";
+      
+      const [newProduct] = await dbConnection.query(query, [name, size, price]);
+      res.status(201).json({ error: false,  message: "Products Created", Products_name: newProduct.name });    
+    }
   } catch (error) {
     console.log("🚀 ~ file: index.js:113 ~ app.post ~ error:", error);
     res.status(404).json({ error: true, message: "Failed to add products"});
