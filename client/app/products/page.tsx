@@ -1,5 +1,5 @@
 "use client";
-import { FormEvent, useContext, useState, useRef } from "react";
+import { FormEvent, useState, useRef } from "react";
 
 export default function page() {
 
@@ -8,6 +8,7 @@ export default function page() {
   const nameRef = useRef<HTMLInputElement | null>(null);
   const sizeRef = useRef<HTMLSelectElement | null>(null);
   const priceRef = useRef<HTMLInputElement | null>(null);
+  const imgRef = useRef<HTMLInputElement | null>(null);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,6 +17,7 @@ export default function page() {
     body.set("name", nameRef.current.value ?? "");
     body.set('size', sizeRef.current.value ?? "");
     body.set('price', priceRef.current.value ?? "");
+    body.set('image', imgRef.current.value ?? "");
 
       fetch("http://localhost:5001/api/add-products", {
         method: "POST",
@@ -51,6 +53,7 @@ export default function page() {
               <option value="45">45</option>
             </select>
             <input type="number" ref={priceRef} name="price" placeholder="Price E.g. 500, 800 .." className="form-input" />
+            <input type="file" ref={imgRef} name="image" className="cursor-pointer bg-[#efefef] p-2 form-input" />
             <div className="text-center mt-9 flex justify-evenly">
               <input
                 type="submit"
