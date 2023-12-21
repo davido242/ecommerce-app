@@ -1,3 +1,8 @@
 import { createContext } from 'react';
 
-export const NameContext = createContext({});
+type UsernameBox = {
+  name?: string;
+  setName?: (name: string) => void;
+}
+
+export const NameContext = createContext<UsernameBox | undefined>(undefined);
