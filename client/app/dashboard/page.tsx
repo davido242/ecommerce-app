@@ -11,7 +11,7 @@ export default function page() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/products", {
+    fetch("http://localhost:5001/product", {
       method: "GET",
       headers: {
         authorization: `Bearer ${window.localStorage.getItem("token")}`,

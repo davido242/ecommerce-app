@@ -22,7 +22,7 @@ export default function page() {
     console.log(imgRef.current?.files[0]);
     // return;
 
-      fetch("http://localhost:5001/api/add-products", {
+      fetch("http://localhost:5001/product/add-products", {
         method: "POST",
         headers: {
           authorization: `Bearer ${window.localStorage.getItem("token")}`
