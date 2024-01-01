@@ -17,7 +17,10 @@ export default function page() {
     body.set("name", nameRef.current.value ?? "");
     body.set('size', sizeRef.current.value ?? "");
     body.set('price', priceRef.current.value ?? "");
-    body.set('image', imgRef.current.value ?? "");
+    body.set('image', imgRef.current.files[0] ?? "");
+
+    console.log(imgRef.current?.files[0]);
+    // return;
 
       fetch("http://localhost:5001/api/add-products", {
         method: "POST",
@@ -41,7 +44,8 @@ export default function page() {
         <div className="bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto">         
           <h3 className="text-center font-bold py-4">Add/Upload Products to Store</h3>
           {errorMsg == "" ? null : <div style={{color: "red"}} className='text-red-500 text-center'>{"**"}{errorMsg}{"**"}</div>}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {/* <form onSubmit={handleSubmit} className="flex flex-col gap-4"> */}
+          <form onSubmit={handleSubmit} encType="multipart/form-data" className="flex flex-col gap-4">
             <input type="text" ref={nameRef} name="name" placeholder="Products Name" className="form-input" />
             <label>Choose Size:</label>
             <select id="size" ref={sizeRef} name="size" className="form-input">
