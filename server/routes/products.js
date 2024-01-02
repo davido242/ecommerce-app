@@ -6,7 +6,7 @@ const authenticate = require("../middleware/authentication");
 
 const upload = multer({
   storage: multer.diskStorage({
-    destination: './images',
+    destination: 'public/images',
     filename: (_req, file, callBack) => {
       return callBack(null, `${Date.now()}_${file.originalname}`)
     }

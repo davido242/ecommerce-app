@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.get("/", (_req, res) => {
   res.send({ error: false, msg: "Server is Working Fine...." });
@@ -24,7 +24,7 @@ const productRouter = require("./routes/products");
 app.use("/product", productRouter);
 
 
-app.use('/static', express.static(path.join(__dirname, 'public')));
+// app.use('/static', express.static(path.join(__dirname, 'public')));
 
 const apiRoute = require("./routes/api");
 app.use("/api", apiRoute);
