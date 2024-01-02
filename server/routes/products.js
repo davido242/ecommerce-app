@@ -13,8 +13,8 @@ const upload = multer({
   }),
 });
 
-// router.use(authenticate);
 router.use(upload.any());
+router.use(authenticate);
 
 router.get("/", async (_req, res) => {
   try {
@@ -36,13 +36,14 @@ router.post("/add-products", async (req, res) => {
   try {
     const { name, size, price } = req.body;
     const image = req.files[0];
-    if (!(name, size, price)) {
+    const imageName = image.filename;
+    if (!(name, size, price, imageName)) {
       res.send({ error: true, message: "Please input all fields." });
     } else {
-      const query = "INSERT INTO products (name, size, price) VALUES (?, ?, ?);";
+      const query = "INSERT INTO products (name, size, price, image) VALUES (?, ?, ?, ?);";
 
-      const [newProduct] = await dbConnection.query(query, [name, size, price]);
-      res.status(201).json({ error: false, message: "Products Created", Products_name: newProduct.name });
+      const [newProduct] = await dbConnection.query(query, [name, size, price, imageName]);
+      res.status(201).json({ error: false, message: "Products Created", Products_name: newProduct.name, image: newProduct.imageName  });
       console.log('filename:', image.filename);
     }
   } catch (error) {
