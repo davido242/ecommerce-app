@@ -10,6 +10,8 @@ export default function page() {
   const [products, setProducts] = useState([])
   const router = useRouter();
 
+  const [error, setError] = useState("");
+
   useEffect(() => {
     fetch("http://localhost:5001/product", {
       method: "GET",
@@ -20,7 +22,7 @@ export default function page() {
       .then((res) => res.json())
       .then((data) => {       
         if(data.error) {
-          router.push("/login");
+          setError(data.error);
         }
         else {     
           setProducts(data);
@@ -34,11 +36,14 @@ export default function page() {
       <div className='bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto'>
         <h2 className='text-center font-bold py-4'>Hey {name}</h2>
         <p className="text-center font-bold py-4">Available Products in Store</p>
-        <div>
-          <ul>
+        { error === "" ? 
+          ( 
+           <div>
+             <ul>
             {products.map((product) => ( <li key={product.id}>{product.name}</li>))}
           </ul>
-        </div>
+        </div>) : (<div style={{color: "red"}} className='text-red-500 text-center'>{"**"}{error}{"**"}</div>)
+      }
       </div>
       <div className='text-center mt-9 flex justify-evenly'>
         <Link href='/products' className='cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4'>Add More Products</Link>

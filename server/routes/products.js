@@ -13,8 +13,8 @@ const upload = multer({
   }),
 });
 
-router.use(upload.any());
 // router.use(authenticate);
+router.use(upload.any());
 
 router.get("/", async (_req, res) => {
   try {
