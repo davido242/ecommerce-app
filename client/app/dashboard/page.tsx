@@ -38,10 +38,10 @@ export default function page() {
               <ul>
                 {products.map((product) => (
                   <li key={product.id}>
-                    <div className="flex gap-4">
+                    <div className="flex justify-between w-2/4 p-2 border">
                       <div>{product.name}</div>
                       <div>
-                        <img src={`${serverUrl}/static/images/${product.image}`} alt={product.image} height={40} width={40} />
+                        <img src={`${serverUrl}/images/${product.image}`} alt={product.image} height={40} width={40} />
                       </div>
                     </div>
                   </li>

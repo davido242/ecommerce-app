@@ -7,10 +7,9 @@ const { dbConnection } = require("../connection_db");
 const jwt = require("jsonwebtoken");
 const jwtSecretKey = process.env.JWT_SECRET_KEY;
 const authenticate = require("../middleware/authentication");
-
 const upload = multer();
 
-// router.use(authenticate);
+
 router.use(upload.none());
 
 router.post("/signup", async (req, res) => {
@@ -68,7 +67,5 @@ router.post("/login", async (req, res) => {
     res.status(404).json({ error: true, message: "User does not exist" });
   }
 });
-
-
 
 module.exports =  router;

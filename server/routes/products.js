@@ -35,8 +35,7 @@ router.get("/", async (_req, res) => {
 router.post("/add-products", async (req, res) => {
   try {
     const { name, size, price } = req.body;
-    const image = req.files[0];
-    const imageName = image.filename;
+    const imageName = req.files[0].filename;
     if (!(name, size, price, imageName)) {
       res.send({ error: true, message: "Please input all fields." });
     } else {
@@ -44,7 +43,6 @@ router.post("/add-products", async (req, res) => {
 
       const [newProduct] = await dbConnection.query(query, [name, size, price, imageName]);
       res.status(201).json({ error: false, message: "Products Created", Products_name: newProduct.name, image: newProduct.imageName  });
-      console.log('filename:', image.filename);
     }
   } catch (error) {
     console.log("🚀 ~ file: index.js:143 ~ app.post ~ error:", error);
