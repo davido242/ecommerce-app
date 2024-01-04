@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useContext, MouseEvent } from "react";
 import { NameContext } from "../AuthContext/NameContext";
+import Image from 'next/image';
 
 export default function header() {
   const { name, setName }: any = useContext(NameContext);
@@ -39,15 +40,19 @@ export default function header() {
             </ul>
           ) : (
             <ul className="flex gap-3">
+                <li className="relative">
+                  <Image src="/assets/images/cart.svg"  alt='cart icon' width='20' height='20'/>
+                  <span className="absolute -top-2 -left-2">3</span>
+                </li>
               <li>
                 <button
                   onClick={handleLogout}
-                  className="cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-4"
+                  className="cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-2 md:p-4"
                 >
                   Logout
                 </button>
               </li>
-              <li>{`Hi ${name}`}</li>
+              <li className="hidden md:block">{`Hi ${name}`}</li>
               <li>
                 <span className="animate-ping inline-flex h-full w-full rounded-full bg-sky-400 opacity-75">O</span>
               </li>

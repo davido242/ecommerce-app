@@ -5,6 +5,7 @@ type Product = {
   name: string;
   size: number;
   price: number;
+  image: string
 }
 
 type ProductC = {

@@ -13,7 +13,7 @@ export default function page() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const url = "http://localhost:5001/api/login";
+    const url = "http://localhost:5001/auth/login";
 
     const body = new FormData();
     body.set("username", usernameRef.current?.value ?? "");

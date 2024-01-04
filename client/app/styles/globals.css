@@ -15,3 +15,7 @@
 .form-input {
   @apply px-4 py-2 outline-none text-[#675d5dbd] rounded;
 }
+
+.cart-btn {
+  @apply cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-2 rounded m-2;
+}
