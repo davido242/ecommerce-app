@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { NameContext } from "../AuthContext/NameContext";
+import CartBtn from "../components/CartBtn";
 
 export default function page() {
   const { name } = useContext(NameContext);
@@ -43,7 +44,7 @@ export default function page() {
                       <div>
                         <img src={`${serverUrl}/images/${product.image}`} alt={product.image} height={40} width={40} />
                       </div>
-                      <button className='cart-btn'>Add to Cart</button>
+                      <CartBtn title='Add to Cart' />
                     </div>
                   </li>
                 ))}

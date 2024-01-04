@@ -4,7 +4,7 @@ import { MouseEvent, useContext } from "react";
 import { NameContext } from "../AuthContext/NameContext";
 import { useRouter } from "next/navigation";
 
-const CartBtn: React.FC<{someProps: string}> = (props) => {
+const CartBtn: React.FC<{title: string}> = (props) => {
   const { name } = useContext(NameContext);
   const router = useRouter();
 
@@ -20,7 +20,7 @@ const CartBtn: React.FC<{someProps: string}> = (props) => {
     
   }
   return (
-    <button className='cart-btn' onClick={handleCart} dangerouslySetInnerHTML={{ __html: props.someProps }} />
+    <button className='cart-btn' onClick={handleCart} dangerouslySetInnerHTML={{ __html: props.title }} />
   )
 }
 
