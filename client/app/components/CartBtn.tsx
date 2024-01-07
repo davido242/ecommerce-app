@@ -4,7 +4,11 @@ import { MouseEvent, useContext } from "react";
 import { NameContext } from "../AuthContext/NameContext";
 import { useRouter } from "next/navigation";
 
-const CartBtn: React.FC<{title: string}> = (props) => {
+type TitleType = {
+  title: string;
+}
+
+const CartBtn = (props: TitleType) => {
   const { name } = useContext(NameContext);
   const router = useRouter();
 

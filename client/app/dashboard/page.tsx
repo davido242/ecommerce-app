@@ -46,7 +46,8 @@ export default function page() {
                       <div>
                         <img src={`${serverUrl}/images/${product.image}`} alt={product.image} height={40} width={40} />
                       </div>
-                      <CartBtn onClick={addToCart(product)} title='Add to Cart' />
+                      {/* <CartBtn onClick={() => addToCart(product)} title='Add to Cart' /> */}
+                      <button onClick={() => addToCart(product)}>Add CartMD </button>
                     </div>
                   </li>
                 ))}
