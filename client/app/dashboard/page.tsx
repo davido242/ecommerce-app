@@ -3,10 +3,12 @@ import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { NameContext } from "../AuthContext/NameContext";
 import CartBtn from "../components/CartBtn";
+import { CartContext } from "../AuthContext/CartContext";
 
 export default function page() {
   const { name } = useContext(NameContext);
   const [products, setProducts] = useState([]);
+  const {cartItems, addToCart} = useContext(CartContext);
 
   const [error, setError] = useState("");
   const serverUrl = "http://localhost:5001";
@@ -44,7 +46,7 @@ export default function page() {
                       <div>
                         <img src={`${serverUrl}/images/${product.image}`} alt={product.image} height={40} width={40} />
                       </div>
-                      <CartBtn title='Add to Cart' />
+                      <CartBtn onClick={addToCart(product)} title='Add to Cart' />
                     </div>
                   </li>
                 ))}
