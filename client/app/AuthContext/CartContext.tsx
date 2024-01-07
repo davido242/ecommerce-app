@@ -16,14 +16,20 @@ type CartContextType = {
   getCartTotal: () => number;
 }
 
-export const CartContext = createContext();
+// adding the types declared for context to the cart-context
+export const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(localStorage.getItem('CartItems') ? JSON.parse(localStorage.getItem('CartItems')) : [])
+// types for cartProviderProps
+type CartProviderProps = {
+  children: ReactNode;
+}
+
+export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+  const [cartItems, setCartItems] = useState<CartItem[]>(localStorage.getItem('CartItems') ? JSON.parse(localStorage.getItem('CartItems')!) : [])
 
 
   // function to add to cart array
-  const addToCart = (item) => {
+  const addToCart = (item: CartItem) => {
     // checkcs if item is in the cart
     const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
 
@@ -39,7 +45,7 @@ export const CartProvider = ({ children }) => {
 
 
   // function to remove from cart array
-  const removeFromCart = (item) => {
+  const removeFromCart = (item: CartItem) => {
     const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
 
     if (isItemInCart.quantity === 1) {
