@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { NameContext } from "./AuthContext/NameContext";
 import { ProductContext } from "./AuthContext/ProductContext";
+import { CartProvider } from "./AuthContext/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -56,12 +57,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Loading />
           ) : (
             <ProductContext.Provider value={{ products, setProducts }}>
-              <Header />
-              {children}
-              <Footer />
+              <CartProvider>
+                <Header />
+                {children}
+                <Footer />
+              </CartProvider>
             </ProductContext.Provider>
           )}
-          </NameContext.Provider>
+        </NameContext.Provider>
       </body>
     </html>
   );

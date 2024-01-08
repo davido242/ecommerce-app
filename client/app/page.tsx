@@ -27,7 +27,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className='flex justify-evenly py-2 animate-bounce'>                
+        <div className='flex justify-evenly py-2 animate-bounce'>
           <CartBtn title={`Free Shipping using this code <span className='font-bold text-[red]'>COM247</span>`} />
         </div>
       </div>
