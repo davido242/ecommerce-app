@@ -2,7 +2,6 @@
 import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { NameContext } from "../AuthContext/NameContext";
-import CartBtn from "../components/CartBtn";
 import { CartContext } from "../AuthContext/CartContext";
 
 export default function page() {
@@ -46,8 +45,7 @@ export default function page() {
                       <div>
                         <img src={`${serverUrl}/images/${product.image}`} alt={product.image} height={40} width={40} />
                       </div>
-                      {/* <CartBtn onClick={() => addToCart(product)} title='Add to Cart' /> */}
-                      <button onClick={() => addToCart(product)}>Add CartMD </button>
+                      <button className="cart-btn" onClick={() => addToCart(product)}>Add Cart</button>
                     </div>
                   </li>
                 ))}

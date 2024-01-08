@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import CartBtn from './components/CartBtn';
+import HomeCartBtn from './components/HomeCartBtn';
 
 export default function Home() {
   return (
@@ -13,22 +13,22 @@ export default function Home() {
             <div className='sales-title'>
               <h5>Sales</h5>
               <Image src='/assets/images/cart-im1.jpeg' alt='' width='200' height='200' className='my-4 mx-auto' />
-              <CartBtn title='Add to Cart' />
+              <HomeCartBtn title='Add to Cart' />
             </div>
             <div className='sales-title'>
               <h5>Brokery</h5>
               <Image src='/assets/images/cart-im2.webp' alt='' width='200' height='200' className='my-4 mx-auto' />
-              <CartBtn title='Add to Cart' />
+              <HomeCartBtn title='Add to Cart' />
             </div>
             <div className='sales-title'>
               <h5>Deliveries</h5>
               <Image src='/assets/images/cart-im1.jpeg' alt='' width='200' height='200' className='my-4 mx-auto' />
-              <CartBtn title='Add to Cart' />
+              <HomeCartBtn title='Add to Cart' />
             </div>
           </div>
         </div>
         <div className='flex justify-evenly py-2 animate-bounce'>
-          <CartBtn title={`Free Shipping using this code <span className='font-bold text-[red]'>COM247</span>`} />
+          <HomeCartBtn title={`Free Shipping using this code <span className='font-bold text-[red]'>COM247</span>`} />
         </div>
       </div>
     </main>
