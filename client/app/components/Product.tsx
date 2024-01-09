@@ -7,7 +7,7 @@ import { CartContext } from "../AuthContext/CartContext";
 export default function Product() {
   const { name } = useContext(NameContext);
   const [products, setProducts] = useState([]);
-  const {cartItems, addToCart} = useContext(CartContext);
+  const { cartItems, addToCart } = useContext(CartContext);
 
   const [error, setError] = useState("");
   const serverUrl = "http://localhost:5001";
@@ -32,24 +32,26 @@ export default function Product() {
   return (
     <div className=" min-h-[calc(100vh-7vh)] pt-2">
       <div className="container mx-auto px-8">
-        <div className="bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto">
+        <div className="bg-brown-bg mt-32 p-4 rounded mx-auto">
           <h2 className="text-center font-bold py-4">Hey {name}</h2>
           <p className="text-center font-bold py-4">Available Products in Store</p>
           {error === "" ? (
-            <div>
-              <ul>
-                {products.map((product) => (
-                  <li key={product.id}>
-                    <div className="flex justify-between p-2 border">
-                      <div>{product.name}</div>
-                      <div>
-                        <img src={`${serverUrl}/images/${product.image}`} alt={product.image} height={40} width={40} />
-                      </div>
-                      <button className="cart-btn" onClick={() => addToCart(product)}>Add Cart</button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+              {products.map((product) => (
+                <div key={product.id} className="p-5 mb-10 border border-[#e17800]">
+                  <div>
+                    <img src={`${serverUrl}/images/${product.image}`} alt={product.image} className="rounded h-48" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg uppercase font-bold py-3">{product.name}</h2>
+                    <p className="text-sm" id="description">{("An apple mobile which is nothing like app Up for a Grab").slice(0, 30)}....</p>
+                    <p className="text-sm font-bold text-[#7f6c6c]">₦ {product.price}</p>
+                  </div>
+                  <button className="cart-btn" onClick={() => addToCart(product)}>
+                    Add Cart
+                  </button>
+                </div>
+              ))}
             </div>
           ) : (
             <div style={{ color: "red" }} className="text-red-500 text-center">

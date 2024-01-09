@@ -9,7 +9,7 @@
 }
 
 .sales-title {
-  @apply bg-brown-bg w-full text-center py-1;
+  @apply bg-brown-bg w-full text-center py-10;
 }
 
 .form-input {
@@ -17,5 +17,5 @@
 }
 
 .cart-btn {
-  @apply cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-2 rounded m-2;
+  @apply cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-2 rounded mt-3;
 }
