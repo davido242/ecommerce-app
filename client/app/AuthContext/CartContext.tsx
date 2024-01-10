@@ -1,9 +1,11 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
+import { StringDecoder } from 'string_decoder';
 
 type CartItem = {
   id: string;
   name: string;
   price: number;
+  image: string;
   quantity: number;
 }
 
