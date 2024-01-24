@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function header() {
   const { name, setName }: any = useContext(NameContext);
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, clearCart } = useContext(CartContext);
   const router = useRouter();
 
   const handleLogout = (e: MouseEvent<HTMLButtonElement>) => {
@@ -16,6 +16,10 @@ export default function header() {
     setName("");
     router.push("/login");
   };
+
+  const goToCart = () => {
+    router.push("/cart")
+  }
 
   return (
     <header className="bg-brown-bg fixed w-full z-[2]">
@@ -42,12 +46,12 @@ export default function header() {
             </ul>
           ) : (
             <ul className="flex gap-3">
-              <li className="relative">
-                <Image src="/assets/images/cart.svg" alt="cart icon" width="20" height="20" />
-                  {cartItems.length === 0 ? "" : (<span className="absolute -top-2 -left-2 bg-[#e16800] h-5 w-5 flex justify-center rounded-full items-center">
+              <button onClick={goToCart} className="relative cursor-pointer pt-1">
+                <Image src="/assets/images/cart.svg" alt="cart icon" width="30" height="30" />
+                  {cartItems.length === 0 ? "" : (<span className="absolute top-1 -right-1 bg-[#e16800] h-6 w-6 flex justify-center rounded-full items-center text-[12px] font-bold">
                   {cartItems.length}
                 </span>)}                
-              </li>
+              </button>
               <li>
                 <button onClick={handleLogout} className="cursor-pointer hover:bg-[#e17800] bg-[#e16800] p-2 md:p-4">
                   Logout
