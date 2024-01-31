@@ -41,7 +41,7 @@ router.post("/signup", async (req, res) => {
       }
     }
   } catch (error) {
-    console.log("🚀 ~ file: index.js:30 ~ app.post ~ error:", error);
+    console.log("🚀 ~ router.post ~ error:", error);
     res.send({ error: true, message: "Something went wrong...." });
   }
 });
@@ -63,7 +63,7 @@ router.post("/login", async (req, res) => {
       }
     }
   } catch (error) {
-    console.log("🚀 ~ file: index.js:59 ~ app.post ~ error:", error);
+    console.log("🚀 ~ router.post ~ error:", error);
     res.status(404).json({ error: true, message: "User does not exist" });
   }
 });

@@ -1,14 +1,29 @@
-version: '3'
+version: '3.3'
 
 services:
   frontend:
     build:
       context: ./client
+    # image: node:18-alpine
+    # working_dir: /app
+    # command: npm run dev
+    # expose:
+    #   - 3000
+    volumes:
+      - ./client:/app
     ports:
-      - "3001:3001"
+      - "3000:3000"
+    env_file:
+      - .env
 
   server:
     build:
       context: ./server
+    volumes:
+      - ./server:/app
     ports:
-      - "5000:5000"
+      - "5001:5001"
+    env_file:
+      - .env
+    # extra_hosts:
+    #   - host.docker.internal:host-gateway

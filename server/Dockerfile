@@ -1,8 +1,8 @@
 # Use the official Node.js image as the base image for the backend
-FROM node:14-alpine
+FROM node:18-alpine
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expose the port that the server will run on
-EXPOSE 5000
+EXPOSE 5001
 
 # Start the server
 CMD ["node", "index.js"]
