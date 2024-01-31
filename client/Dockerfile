@@ -1,6 +1,6 @@
-FROM node:14-alpine as builder
+FROM node:18-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -10,15 +10,6 @@ COPY . .
 
 RUN npm run build
 
-FROM node:alpine
-
-WORKDIR /user/src/app
-
-COPY --from=builder /usr/src/app/package*.json ./
-COPY --from=builder /usr/src/app/.next ./.next
-
 EXPOSE 3000
 
-# Start the app Normally, I run npm run dev
-# CMD ["npm", "start"]
-CMD ["npm", "run dev"]
+CMD ["npm", "run", "dev"]

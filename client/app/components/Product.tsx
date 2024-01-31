@@ -30,15 +30,15 @@ export default function Product() {
   }, []);
 
   return (
-    <div className=" min-h-[calc(100vh-7vh)] pt-2">
+    <div className=" min-h-[calc(100vh-7vh)] pt-24">
       <div className="container mx-auto px-8">
-        <div className="bg-brown-bg mt-32 p-4 rounded mx-auto">
+        <div className="bg-slate-100 p-4 rounded mx-auto">
           <h2 className="text-center font-bold py-4">Hey {name}</h2>
           <p className="text-center font-bold py-4">Available Products in Store</p>
           {error === "" ? (
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
               {products.map((product) => (
-                <div key={product.id} className="p-5 mb-10 border border-[#e17800]">
+                <div key={product.id} className="p-5 mb-10 border border-amber-300 rounded-md">
                   <div>
                     <img src={`${serverUrl}/images/${product.image}`} alt={product.image} className="rounded h-48" />
                   </div>

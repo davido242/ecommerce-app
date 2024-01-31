@@ -9,7 +9,7 @@
 }
 
 .sales-title {
-  @apply bg-brown-bg w-full text-center py-10;
+  @apply bg-amber-600 w-full text-center py-10;
 }
 
 .form-input {

@@ -22,10 +22,10 @@ export default function header() {
   }
 
   return (
-    <header className="bg-brown-bg fixed w-full z-[2]">
+    <header className="bg-amber-600 fixed w-full z-[2]">
       <div className="container mx-auto px-8 py-2 flex justify-between">
-        <ul className="flex gap-3">
-          <div className="uppercase text-[#fff] font-bold text-2xl">
+        <ul className="flex items-center gap-3">
+          <div className="uppercase text-white font-bold text-2xl">
             <Link href="/">Logo</Link>
           </div>
           {name == "" ? null : (
@@ -45,7 +45,7 @@ export default function header() {
               </li>
             </ul>
           ) : (
-            <ul className="flex gap-3">
+            <ul className="flex items-center gap-3">
               <button onClick={goToCart} className="relative cursor-pointer pt-1">
                 <Image src="/assets/images/cart.svg" alt="cart icon" width="30" height="30" />
                   {cartItems.length === 0 ? "" : (<span className="absolute top-1 -right-1 bg-[#e16800] h-6 w-6 flex justify-center rounded-full items-center text-[12px] font-bold">

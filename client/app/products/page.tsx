@@ -41,7 +41,7 @@ export default function page() {
   return (
     <div className=" min-h-[calc(100vh-7vh)] pt-2">
       <div className="container mx-auto px-8">
-        <div className="bg-brown-bg mt-32 p-4 rounded max-w-[500px] mx-auto">
+        <div className="bg-amber-600 mt-32 p-4 rounded max-w-[500px] mx-auto">
           <h3 className="text-center font-bold py-4">Add/Upload Products to Store</h3>
           {errorMsg == "" ? null : (
             <div style={{ color: "red" }} className="text-red-500 text-center">
