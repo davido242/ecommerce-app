@@ -22,7 +22,7 @@ export default function signup() {
     body.set('conPassword', conPasswordRef.current?.value ?? "");
     body.set('address', addressRef.current?.value ?? "");
 
-    const url = "http://localhost:5001/api/signup";
+    const url = "http://localhost:5001/auth/signup";
     
     fetch(url, {
       method: "POST",

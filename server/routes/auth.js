@@ -57,13 +57,13 @@ router.post("/login", async (req, res) => {
         const id = users[0].id;
         const token = jwt.sign({ id }, jwtSecretKey, { expiresIn: "1h" });
         console.log({ Longin: true, token });
-        res.set("authorization", `Bearer ${token}`).status(201).json({ token, error: false, name: users[0].name });
+        res.set("authorization", `Bearer ${token}`).status(201).json({ token, error: false, name: users[0].name, address: users[0].address });
       } else {
         res.send({ error: true, message: "Wrong Pword" });
       }
     }
   } catch (error) {
-    console.log("🚀 ~ file: index.js:59 ~ app.post ~ error:", error);
+    console.log("🚀 ~ file: index.js:66 ~ app.post ~ error:", "User doesnt exist");
     res.status(404).json({ error: true, message: "User does not exist" });
   }
 });

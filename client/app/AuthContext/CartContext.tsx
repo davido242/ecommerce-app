@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import { StringDecoder } from 'string_decoder';
 
 type CartItem = {
   id: string;
@@ -23,8 +22,17 @@ type CartProviderProps = {
   children: ReactNode;
 }
 
+// export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+//   const [cartItems, setCartItems] = useState<CartItem[]>(localStorage.getItem('CartItems') ? JSON.parse(localStorage.getItem('CartItems')!) : [])
+
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>(localStorage.getItem('CartItems') ? JSON.parse(localStorage.getItem('CartItems')!) : [])
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    if (typeof window !== 'undefined') {
+      const storedCartItems = localStorage.getItem('CartItems');
+      return storedCartItems ? JSON.parse(storedCartItems) : [];
+    }
+    return [];
+  });
 
   const addToCart = (item: CartItem) => {
     const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);

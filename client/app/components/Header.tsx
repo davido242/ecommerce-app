@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function header() {
   const { name, setName }: any = useContext(NameContext);
-  const { cartItems, clearCart } = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
   const router = useRouter();
 
   const handleLogout = (e: MouseEvent<HTMLButtonElement>) => {
@@ -59,7 +59,7 @@ export default function header() {
               </li>
               <li className="hidden md:block">{`Hi ${name}`}</li>
               <li>
-                <span className="animate-ping inline-flex h-full w-full rounded-full bg-sky-400 opacity-75">O</span>
+                <span className="font-bold h-full w-full rounded-full text-[green]">O</span>
               </li>
             </ul>
           )}

@@ -23,8 +23,8 @@ app.use("/auth", authRouter);
 const productRouter = require("./routes/products");
 app.use("/product", productRouter);
 
-const apiRoute = require("./routes/api");
-app.use("/api", apiRoute);
+const apiRouter = require("./routes/api");
+app.use("/api", apiRouter);
 
 
 

@@ -18,7 +18,7 @@ router.use(authenticate);
 
 router.get("/", async (_req, res) => {
   try {
-    const query = "SELECT * FROM products";
+    const query = "SELECT * FROM product";
 
     const [rows] = await dbConnection.query(query);
     if (rows.length === 0) {
@@ -39,7 +39,7 @@ router.post("/add-products", async (req, res) => {
     if (!(name, size, price, imageName)) {
       res.send({ error: true, message: "Please input all fields." });
     } else {
-      const query = "INSERT INTO products (name, size, price, image) VALUES (?, ?, ?, ?);";
+      const query = "INSERT INTO product (name, size, price, image) VALUES (?, ?, ?, ?);";
 
       const [newProduct] = await dbConnection.query(query, [name, size, price, imageName]);
       res.status(201).json({ error: false, message: "Products Created", Products_name: newProduct.name, image: newProduct.imageName  });
